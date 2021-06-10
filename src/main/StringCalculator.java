@@ -26,7 +26,7 @@ public class StringCalculator implements StringCalculatorIntarface{
                 sum+= Double.parseDouble(this.numbers.get(i));
             }
             result = String.format("%.1f", sum);
-            if(result.length()<4 && result.contains(",0")){
+            if(result.contains(",0")){
                 Integer convert = sum.intValue();
                 result = convert.toString();
             }
