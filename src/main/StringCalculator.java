@@ -7,10 +7,9 @@ public class StringCalculator implements StringCalculatorIntarface{
 
     public String add(String numbers){
         String[] separeNumbers = numbers.split(",");
-        for(int i=0;i<separeNumbers.length;i++){
+        for(int i=0;i<separeNumbers.length;i++){ ;
             this.numbers.add(separeNumbers[i]);
         }
-
         return sum();
     }
 

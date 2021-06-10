@@ -26,6 +26,18 @@ public class ApplicationTests extends TestCase {
 
     public void testManyNumbers(){
         assertEquals("20", new StringCalculator().add("2.5,2.5,5,2,2,2,2,2"));
+        assertEquals("100", new StringCalculator().add("10,20,20,10,10,10,5.5,5.5,9"));
+    }
+
+    public void testNewSeparator(){
+        assertEquals("6", new StringCalculator().add("1\\n,2,3"));
+    }
+
+    public void testWrongNewSeparator(){
+        assertEquals("Number expected but '\\n' found at position 6.",new StringCalculator().add
+                ("175.2,\\n35"));
+
+
     }
 
 
