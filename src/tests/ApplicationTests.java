@@ -12,7 +12,12 @@ public class ApplicationTests extends TestCase {
         assertEquals("0", new StringCalculator().add(""));
     }
 
-    public void testTwoNumbers(){
+    public void testTwoIntegerNumbers(){
         assertEquals("3", new StringCalculator().add("1,2"));
     }
+
+    public void testTowDoubleNumbers(){
+        assertEquals("3.3", new StringCalculator().add("1.1,2.2"));
+    }
+
 }
