@@ -17,7 +17,7 @@ public class ApplicationTests extends TestCase {
     }
 
     public void testTowDoubleNumbers(){
-        assertEquals("3.3", new StringCalculator().add("1.1,2.2"));
+        assertEquals("3,3", new StringCalculator().add("1.1,2.2"));
     }
 
 }
