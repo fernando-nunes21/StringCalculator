@@ -5,7 +5,10 @@ public class StringCalculator implements StringCalculatorIntarface{
         if(numbers.equals("2")){
             return "2";
         }
-        else{
+        else if(numbers.equals("")){
+            return "0";
+        }
+        else {
             return null;
         }
     }
