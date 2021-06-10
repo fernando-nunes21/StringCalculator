@@ -16,8 +16,17 @@ public class ApplicationTests extends TestCase {
         assertEquals("3", new StringCalculator().add("1,2"));
     }
 
-    public void testTowDoubleNumbers(){
+    public void testTwoDoubleNumbers(){
         assertEquals("3,3", new StringCalculator().add("1.1,2.2"));
     }
+
+    public void testSumThreeNumbers(){
+        assertEquals("6", new StringCalculator().add("1,2,3"));
+    }
+
+    public void testManyNumbers(){
+        assertEquals("20", new StringCalculator().add("2.5,2.5,5,2,2,2,2,2"));
+    }
+
 
 }
