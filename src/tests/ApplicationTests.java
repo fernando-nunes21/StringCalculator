@@ -1,5 +1,6 @@
 package tests;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 import main.StringCalculator;
 
@@ -31,6 +32,7 @@ public class ApplicationTests extends TestCase {
 
     public void testNewSeparatorReturnSix(){
         assertEquals("6", new StringCalculator().add("1\\n2,3"));
+        assertEquals("6", new StringCalculator().add("1\\n2\\n3"));
     }
 
     public void testWrongNewSeparatorReturnError(){
@@ -39,6 +41,9 @@ public class ApplicationTests extends TestCase {
         assertEquals("Number expected but '\\n' found at position 2.", new StringCalculator().add("1,\\n2,3"));
     }
 
+    public void testMissNumberReturnError(){
+        assertEquals("Number expected but EOF found.", new StringCalculator().add("1,2,"));
+    }
 
 
 
