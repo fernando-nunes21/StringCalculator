@@ -30,8 +30,10 @@ public class ApplicationTests extends TestCase {
     }
 
     public void testNewSeparator(){
-        assertEquals("6", new StringCalculator().add("1\\n,2,3"));
+        assertEquals("6", new StringCalculator().add("1\\n2,3"));
     }
+
+
 
     public void testWrongNewSeparator(){
         assertEquals("Number expected but '\\n' found at position 6.",new StringCalculator().add

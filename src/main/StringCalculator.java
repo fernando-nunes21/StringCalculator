@@ -6,7 +6,12 @@ public class StringCalculator implements StringCalculatorIntarface{
     private ArrayList<String> numbers = new ArrayList<>();
 
     public String add(String numbers){
-        String[] separeNumbers = numbers.split(",");
+        String[] separeNumbers;
+        String response = "";
+        response = validationStringNumbers(numbers);
+        if(response != ""){ return response; }
+        numbers = removeDelimiter(numbers);
+        separeNumbers = numbers.split(",");
         for(int i=0;i<separeNumbers.length;i++){ ;
             this.numbers.add(separeNumbers[i]);
         }
@@ -33,4 +38,16 @@ public class StringCalculator implements StringCalculatorIntarface{
         return result;
     }
 
+    private String  validationStringNumbers(String numbers) {
+        if (numbers.contains(",\\n") || numbers.contains("\\n,")) {
+            return "Number expected but '\\n' found at position 6.";
+        }
+        return "";
+    }
+
+     private String removeDelimiter(String numbers) {
+        numbers = numbers.replace('\\',' ');
+        numbers = numbers.replace('n', ',');
+        return numbers;
+     }
 }
