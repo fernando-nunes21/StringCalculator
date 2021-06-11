@@ -36,7 +36,7 @@ public class ApplicationTests extends TestCase {
     public void testWrongNewSeparatorReturnError(){
         assertEquals("Number expected but '\\n' found at position 6.",new StringCalculator().add
                 ("175.2,\\n35"));
-        assertEquals("Number expected but '\\n' found at position 1", new StringCalculator().add("1,\\n2,3"));
+        assertEquals("Number expected but '\\n' found at position 2.", new StringCalculator().add("1,\\n2,3"));
     }
 
 

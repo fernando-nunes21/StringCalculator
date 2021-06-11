@@ -1,5 +1,7 @@
 package main;
 
+import com.sun.security.auth.UnixNumericGroupPrincipal;
+
 import java.util.ArrayList;
 
 public class StringCalculator implements StringCalculatorIntarface{
@@ -39,8 +41,14 @@ public class StringCalculator implements StringCalculatorIntarface{
     }
 
     private String  validationStringNumbers(String numbers) {
+        int pos=0;
         if (numbers.contains(",\\n") || numbers.contains("\\n,")) {
-            return "Number expected but '\\n' found at position 6.";
+            for (int i=0;i<numbers.length();i++){
+                if(numbers.charAt(i) == '\\'){
+                    pos = i;
+                }
+            }
+            return "Number expected but '\\n' found at position "+pos+".";
         }
         return "";
     }
