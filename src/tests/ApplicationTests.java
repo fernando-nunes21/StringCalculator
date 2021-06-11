@@ -45,6 +45,9 @@ public class ApplicationTests extends TestCase {
         assertEquals("Number expected but EOF found.", new StringCalculator().add("1,2,"));
     }
 
+    public void testDelimiterAndReturnThree(){
+        assertEquals("3", new StringCalculator().add("//;\n1;2"));
+    }
 
 
 
