@@ -24,24 +24,23 @@ public class StringCalculator implements StringCalculatorIntarface{
         Double sum = 0.0;
         String result="";
 
-        if(this.numbers.size() == 1 && this.numbers.get(0) == ""){
-            return "0";
+        for (int i=0;i<this.numbers.size();i++){
+            sum+= Double.parseDouble(this.numbers.get(i));
         }
-        else{
-            for (int i=0;i<this.numbers.size();i++){
-                sum+= Double.parseDouble(this.numbers.get(i));
-            }
-            result = String.format("%.1f", sum);
-            if(result.contains(",0")){
-                Integer convert = sum.intValue();
-                result = convert.toString();
-            }
+        result = String.format("%.1f", sum);
+        if(result.contains(",0")){
+            Integer convert = sum.intValue();
+            result = convert.toString();
         }
+
         return result;
     }
 
     private String  validationStringNumbers(String numbers) {
         int pos=0;
+        if (numbers.equals("")){
+            return "0";
+        }
         if (numbers.contains(",\\n") || numbers.contains("\\n,")) {
             for (int i=0;i<numbers.length();i++){
                 if(numbers.charAt(i) == '\\'){
@@ -49,6 +48,9 @@ public class StringCalculator implements StringCalculatorIntarface{
                 }
             }
             return "Number expected but '\\n' found at position "+pos+".";
+        }
+        else if(numbers.charAt(numbers.length()-1) == ','){
+            return "Number expected but EOF found.";
         }
         return "";
     }
