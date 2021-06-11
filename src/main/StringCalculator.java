@@ -6,15 +6,18 @@ import java.util.ArrayList;
 
 public class StringCalculator implements StringCalculatorIntarface{
     private ArrayList<String> numbers = new ArrayList<>();
+    private String delimiter;
 
     public String add(String numbers){
         String[] separeNumbers;
         String response = "";
         response = validationStringNumbers(numbers);
         if(response != ""){ return response; }
-        numbers = removeDelimiter(numbers);
-        separeNumbers = numbers.split(",");
-        for(int i=0;i<separeNumbers.length;i++){ ;
+        this.delimiter = extractInputDelimiter(numbers);
+        numbers = removeDelimiter(numbers,this.delimiter.charAt(0));
+        separeNumbers = numbers.split(this.delimiter);
+        separeNumbers = emptyStringAfterDelimiterResolve(separeNumbers);
+        for(int i=0;i<separeNumbers.length;i++){
             this.numbers.add(separeNumbers[i]);
         }
         return sum();
@@ -55,9 +58,36 @@ public class StringCalculator implements StringCalculatorIntarface{
         return "";
     }
 
-     private String removeDelimiter(String numbers) {
+     private String removeDelimiter(String numbers, char delimiter) {
+        numbers = numbers.replace('/',' ');
+        numbers = numbers.replace('/',' ');
         numbers = numbers.replace('\\',' ');
-        numbers = numbers.replace('n', ',');
+        numbers = numbers.replace('n', delimiter);
         return numbers;
+     }
+
+     private String extractInputDelimiter(String numbers){
+        StringBuilder delimiter= new StringBuilder();
+        if(numbers.contains("//")) {
+            int positionstart = numbers.lastIndexOf("/");
+            int posfinal = numbers.indexOf("\n");
+            for (int i = positionstart+1; i < posfinal; i++) {
+                delimiter.append(numbers.charAt(i));
+            }
+        }
+        else{
+            delimiter.append(",");
+        }
+
+        return delimiter.toString();
+     }
+
+     private String[] emptyStringAfterDelimiterResolve(String[] separeNumbers){
+        for (int i=0; i<separeNumbers.length; i++){
+            if(separeNumbers[i].equals("  ")){
+               separeNumbers[i] = "0";
+            }
+        }
+        return separeNumbers;
      }
 }
