@@ -4,43 +4,43 @@ import junit.framework.TestCase;
 import main.StringCalculator;
 
 public class ApplicationTests extends TestCase {
-    public void testSumOneNumber(){
+    public void testSumReturnTwo(){
         assertEquals("2", new StringCalculator().add("2"));
     }
 
-    public void testSumEmpty(){
+    public void testSumReturnZero(){
         assertEquals("0", new StringCalculator().add(""));
     }
 
-    public void testTwoIntegerNumbers(){
+    public void testSumReturnThree(){
         assertEquals("3", new StringCalculator().add("1,2"));
     }
 
-    public void testTwoDoubleNumbers(){
+    public void testSumReturnDouble(){
         assertEquals("3,3", new StringCalculator().add("1.1,2.2"));
     }
 
-    public void testSumThreeNumbers(){
+    public void testSumWithThreeNumbersReturnSix(){
         assertEquals("6", new StringCalculator().add("1,2,3"));
     }
 
-    public void testManyNumbers(){
+    public void testSumWithManyNumbersReturn(){
         assertEquals("20", new StringCalculator().add("2.5,2.5,5,2,2,2,2,2"));
         assertEquals("100", new StringCalculator().add("10,20,20,10,10,10,5.5,5.5,9"));
     }
 
-    public void testNewSeparator(){
+    public void testNewSeparatorReturnSix(){
         assertEquals("6", new StringCalculator().add("1\\n2,3"));
     }
 
-
-
-    public void testWrongNewSeparator(){
+    public void testWrongNewSeparatorReturnError(){
         assertEquals("Number expected but '\\n' found at position 6.",new StringCalculator().add
                 ("175.2,\\n35"));
-
-
+        assertEquals("Number expected but '\\n' found at position 1", new StringCalculator().add("1,\\n2,3"));
     }
+
+
+
 
 
 }
