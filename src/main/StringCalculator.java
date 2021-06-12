@@ -73,7 +73,11 @@ public class StringCalculator implements StringCalculatorIntarface{
         if(numbers.contains("//")) {
             int positionstart = numbers.lastIndexOf("/");
             int posfinal = numbers.indexOf("\n");
+            System.out.println(numbers);
+            System.out.println(posfinal);
+            System.out.println(positionstart);
             for (int i = positionstart+1; i < posfinal; i++) {
+                System.out.println(numbers.charAt(i));
                 delimiter.append(numbers.charAt(i));
             }
         }

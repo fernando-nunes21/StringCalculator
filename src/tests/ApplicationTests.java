@@ -49,6 +49,14 @@ public class ApplicationTests extends TestCase {
         assertEquals("3", new StringCalculator().add("//;\n1;2"));
     }
 
+    public void testDelimiterAndReturnFive(){
+        assertEquals("5", new StringCalculator().add("//sep\n2sep3"));
+    }
+
+    public void testTwoDelimiterAndReturnError(){
+        assertEquals("';' expected but '|' found at position 3.",new StringCalculator().add("//;\n1|2"));
+    }
+
 
 
 }
