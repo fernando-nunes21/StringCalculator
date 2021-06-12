@@ -16,7 +16,6 @@ public class StringCalculator implements StringCalculatorIntarface{
         this.delimiter = extractInputDelimiter(numbers);
         numbers = removeDelimiter(numbers,this.delimiter.charAt(0));
         separeNumbers = numbers.split(this.delimiter);
-        separeNumbers = emptyStringAfterDelimiterResolve(separeNumbers);
         for(int i=0;i<separeNumbers.length;i++){
             this.numbers.add(separeNumbers[i]);
         }
@@ -61,8 +60,8 @@ public class StringCalculator implements StringCalculatorIntarface{
      private String removeDelimiter(String numbers, char delimiter) {
         numbers = numbers.replace('/',' ');
         numbers = numbers.replace('/',' ');
-        numbers = numbers.replace('\\',' ');
-        numbers = numbers.replace('n', delimiter);
+        numbers = numbers.replace('\\', ' ');
+        numbers = numbers.replace('n', ' ');
         return numbers;
      }
 
@@ -82,12 +81,4 @@ public class StringCalculator implements StringCalculatorIntarface{
         return delimiter.toString();
      }
 
-     private String[] emptyStringAfterDelimiterResolve(String[] separeNumbers){
-        for (int i=0; i<separeNumbers.length; i++){
-            if(separeNumbers[i].equals("  ")){
-               separeNumbers[i] = "0";
-            }
-        }
-        return separeNumbers;
-     }
 }
