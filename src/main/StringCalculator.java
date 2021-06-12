@@ -2,6 +2,7 @@ package main;
 
 import com.sun.security.auth.UnixNumericGroupPrincipal;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.util.ArrayList;
 
 public class StringCalculator implements StringCalculatorIntarface{
@@ -16,6 +17,8 @@ public class StringCalculator implements StringCalculatorIntarface{
         this.delimiter = extractInputDelimiter(numbers);
         numbers = removeDelimiter(numbers,this.delimiter.charAt(0));
         separeNumbers = numbers.split(this.delimiter);
+        if(!this.delimiter.equals(",")){ separeNumbers = removeEmptySpaces(separeNumbers); }
+
         for(int i=0;i<separeNumbers.length;i++){
             this.numbers.add(separeNumbers[i]);
         }
@@ -61,7 +64,7 @@ public class StringCalculator implements StringCalculatorIntarface{
         numbers = numbers.replace('/',' ');
         numbers = numbers.replace('/',' ');
         numbers = numbers.replace('\\', ' ');
-        numbers = numbers.replace('n', ' ');
+        numbers = numbers.replace('n', delimiter);
         return numbers;
      }
 
@@ -79,6 +82,13 @@ public class StringCalculator implements StringCalculatorIntarface{
         }
 
         return delimiter.toString();
+     }
+
+     private String[] removeEmptySpaces(String[] separeNumbers){
+        while(separeNumbers[0].contains(" ")){
+            separeNumbers[0] = separeNumbers[0].replace(' ','0');
+        }
+        return separeNumbers;
      }
 
 }

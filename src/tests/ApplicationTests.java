@@ -46,7 +46,7 @@ public class ApplicationTests extends TestCase {
     }
 
     public void testDelimiterAndReturnThree(){
-        assertEquals("3", new StringCalculator().add("//|\n1|2"));
+        assertEquals("3", new StringCalculator().add("//;\n1;2"));
     }
 
 
