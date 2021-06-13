@@ -94,6 +94,17 @@ public class StringCalculator implements StringCalculatorIntarface{
         return separeNumbers;
      }
 
-
+    private String validatorNegativeNumbers(){
+        String response = "";
+        for (int i=0;i<this.numbers.size();i++){
+            if(Double.parseDouble(this.numbers.get(i)) < 0){
+                if(response==""){
+                    response = "Negative not allowed :";
+                }
+                response = response+" "+this.numbers.get(i);
+            }
+        }
+        return response;
+    }
 
 }
