@@ -1,8 +1,5 @@
 package main;
 
-import com.sun.security.auth.UnixNumericGroupPrincipal;
-
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.ArrayList;
 
 public class StringCalculator implements StringCalculatorIntarface{
@@ -94,5 +91,6 @@ public class StringCalculator implements StringCalculatorIntarface{
         }
         return separeNumbers;
      }
+
 
 }
