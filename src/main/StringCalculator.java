@@ -19,6 +19,8 @@ public class StringCalculator implements StringCalculatorIntarface{
         for(int i=0;i<separeNumbers.length;i++){
             this.numbers.add(separeNumbers[i]);
         }
+        response = validatorNegativeNumbers();
+        if (response != ""){ return response; }
         return sum();
     }
 
@@ -91,6 +93,7 @@ public class StringCalculator implements StringCalculatorIntarface{
         }
         return separeNumbers;
      }
+
 
 
 }

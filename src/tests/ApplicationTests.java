@@ -54,7 +54,9 @@ public class ApplicationTests extends TestCase {
     }
 
 
-
+    public void testNegativeNumbersReturnError(){
+        assertEquals("Negative not allowed : -4 -5",new StringCalculator().add("2,-4,-5"));
+    }
 
 
 
