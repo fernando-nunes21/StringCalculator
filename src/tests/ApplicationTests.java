@@ -58,7 +58,9 @@ public class ApplicationTests extends TestCase {
         assertEquals("Negative not allowed : -4 -5",new StringCalculator().add("2,-4,-5"));
     }
 
-
+    public void testMultReturnFour(){
+        assertEquals("4", new StringCalculator().multiplication("2,2"));
+    }
 
 
 

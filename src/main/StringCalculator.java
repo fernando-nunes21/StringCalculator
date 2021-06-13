@@ -24,6 +24,8 @@ public class StringCalculator implements StringCalculatorIntarface{
         return sum();
     }
 
+
+
     private String sum(){
         Double sum = 0.0;
         String result="";
@@ -105,6 +107,22 @@ public class StringCalculator implements StringCalculatorIntarface{
             }
         }
         return response;
+    }
+
+    private String mult(){
+        Double mult = 0.0;
+        String result="";
+
+        for (int i=0;i<this.numbers.size();i++){
+            mult+= Double.parseDouble(this.numbers.get(i));
+        }
+        result = String.format("%.1f", mult);
+        if(result.contains(",0")){
+            Integer convert = mult.intValue();
+            result = convert.toString();
+        }
+
+        return result;
     }
 
 }
