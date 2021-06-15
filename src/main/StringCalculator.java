@@ -10,11 +10,14 @@ public class StringCalculator implements StringCalculatorIntarface{
         String[] separeNumbers;
         String response = "";
         response = validationStringNumbers(numbers);
-        if(response != ""){ return response; }
+        if(response != ""){
+            return response;
+        }
         this.delimiter = extractInputDelimiter(numbers);
         numbers = removeDelimiter(numbers,this.delimiter.charAt(0));
         separeNumbers = numbers.split(this.delimiter);
-        if(!this.delimiter.equals(",")){ separeNumbers = removeEmptySpaces(separeNumbers); }
+        if(!this.delimiter.equals(",")){
+                separeNumbers = removeEmptySpaces(separeNumbers); }
 
         for(int i=0;i<separeNumbers.length;i++){
             this.numbers.add(separeNumbers[i]);
@@ -28,17 +31,24 @@ public class StringCalculator implements StringCalculatorIntarface{
         String[] separeNumbers;
         String response = "";
         response = validationStringNumbers(numbers);
-        if(response != ""){ return response; }
+        if(response != ""){
+            return response;
+        }
         this.delimiter = extractInputDelimiter(numbers);
         numbers = removeDelimiter(numbers,this.delimiter.charAt(0));
         separeNumbers = numbers.split(this.delimiter);
-        if(!this.delimiter.equals(",")){ separeNumbers = removeEmptySpaces(separeNumbers); }
+        if(!this.delimiter.equals(",")){
+            separeNumbers = removeEmptySpaces(separeNumbers);
+        }
 
         for(int i=0;i<separeNumbers.length;i++){
             this.numbers.add(separeNumbers[i]);
         }
         response = validatorNegativeNumbers();
-        if (response != ""){ return response; }
+        if (response != ""){
+            return response;
+        }
+
         return sum();
     }
 

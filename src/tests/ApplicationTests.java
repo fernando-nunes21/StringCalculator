@@ -5,60 +5,60 @@ import junit.framework.TestCase;
 import main.StringCalculator;
 
 public class ApplicationTests extends TestCase {
-    public void testSumReturnTwo(){
+    public void testInputTwoShouldReturnTwo(){
         assertEquals("2", new StringCalculator().add("2"));
     }
 
-    public void testSumReturnZero(){
+    public void testInputemptyInputShouldReturnZero(){
         assertEquals("0", new StringCalculator().add(""));
     }
 
-    public void testSumReturnThree(){
+    public void testInputinputNumbersOneAndTwoShouldSumAndReturnThree(){
         assertEquals("3", new StringCalculator().add("1,2"));
     }
 
-    public void testSumReturnDouble(){
+    public void testInputinputNumbersDoubleToSumAndShouldReturnDouble(){
         assertEquals("3,3", new StringCalculator().add("1.1,2.2"));
     }
 
-    public void testSumWithThreeNumbersReturnSix(){
+    public void testInputinputThreeNumbersAndShouldReturnSumEqualToSix(){
         assertEquals("6", new StringCalculator().add("1,2,3"));
     }
 
-    public void testSumWithManyNumbersReturn(){
+    public void testInputinputManyNumbersDoubleAndIntegerToSumShouldReturn(){
         assertEquals("20", new StringCalculator().add("2.5,2.5,5,2,2,2,2,2"));
         assertEquals("100", new StringCalculator().add("10,20,20,10,10,10,5.5,5.5,9"));
     }
 
-    public void testNewSeparatorReturnSix(){
+    public void testInputinputOneTwoThreeAndSeparatorShouldReturnSix(){
         assertEquals("6", new StringCalculator().add("1\\n2,3"));
         assertEquals("6", new StringCalculator().add("1\\n2\\n3"));
     }
 
-    public void testWrongNewSeparatorReturnError(){
+    public void testInputinputWrongSeparatorShouldReturnErrorMessage(){
         assertEquals("Number expected but '\\n' found at position 6.",new StringCalculator().add
                 ("175.2,\\n35"));
         assertEquals("Number expected but '\\n' found at position 2.", new StringCalculator().add("1,\\n2,3"));
     }
 
-    public void testMissNumberReturnError(){
+    public void testInputinputMissingNumberAfterSeparatorShouldReturnErrorEOF(){
         assertEquals("Number expected but EOF found.", new StringCalculator().add("1,2,"));
     }
 
-    public void testDelimiterAndReturnThree(){
+    public void testInputinputDelimiteraAndOneAndTwoShouldReturnThree(){
         assertEquals("3", new StringCalculator().add("//;\n1;2"));
     }
 
-    public void testDelimiterAndReturnFive(){
+    public void testInputinputDelimiterAndTwoAndThreeShouldReturnFive(){
         assertEquals("5", new StringCalculator().add("//sep\n2sep3"));
     }
 
 
-    public void testNegativeNumbersReturnError(){
+    public void testInputinputNegativeNumberShouldReturnError(){
         assertEquals("Negative not allowed : -4 -5",new StringCalculator().add("2,-4,-5"));
     }
 
-    public void testMultReturnFour(){
+    public void testInputinputTwoAndTwoAndMultShouldReturnFour(){
         assertEquals("4", new StringCalculator().multiplication("2,2"));
     }
 
