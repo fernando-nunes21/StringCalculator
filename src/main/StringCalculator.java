@@ -1,63 +1,118 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class StringCalculator implements StringCalculatorIntarface{
-    private ArrayList<String> numbers = new ArrayList<>();
-    private String delimiter;
+public class StringCalculator{
+    private final ArrayList<String> numbers = new ArrayList<>();
 
-    public String add(String numbers){
-        String[] separeNumbers;
-        String response = "";
-        response = validationStringNumbers(numbers);
-        if(response != ""){
-            return response;
+    public String addToSum(String inputValue){
+        String operationResult;
+        operationResult = add(inputValue);
+        if(operationResult.equals("")){
+            operationResult = sum();
         }
-        this.delimiter = extractInputDelimiter(numbers);
-        numbers = removeDelimiter(numbers,this.delimiter.charAt(0));
-        separeNumbers = numbers.split(this.delimiter);
-        if(!this.delimiter.equals(",")){
-                separeNumbers = removeEmptySpaces(separeNumbers); }
-
-        for(int i=0;i<separeNumbers.length;i++){
-            this.numbers.add(separeNumbers[i]);
-        }
-        response = validatorNegativeNumbers();
-        if (response != ""){ return response; }
-        return sum();
+        return operationResult;
     }
 
-    public String multiplication(String numbers){
-        String[] separeNumbers;
-        String response = "";
-        response = validationStringNumbers(numbers);
-        if(response != ""){
+    public String addToMulti(String inputValue){
+        String operationResult;
+        operationResult = add(inputValue);
+        if(operationResult.equals("")){
+            operationResult = multi();
+        }
+        return operationResult;
+    }
+
+    private String add(String inputValue){
+        List<String> numbersFromString;
+        String response = validationStringNumbers(inputValue);
+        if(!response.equals("")){
             return response;
         }
-        this.delimiter = extractInputDelimiter(numbers);
-        numbers = removeDelimiter(numbers,this.delimiter.charAt(0));
-        separeNumbers = numbers.split(this.delimiter);
-        if(!this.delimiter.equals(",")){
-            separeNumbers = removeEmptySpaces(separeNumbers);
+        String delimiter = extractInputDelimiter(inputValue);
+        inputValue = removeDelimiter(inputValue, delimiter.charAt(0));
+        numbersFromString = Arrays.asList(inputValue.split(delimiter));
+        if(!delimiter.equals(",")){
+            numbersFromString = removeEmptySpaces(numbersFromString);
         }
-
-        for(int i=0;i<separeNumbers.length;i++){
-            this.numbers.add(separeNumbers[i]);
-        }
+        this.numbers.addAll(numbersFromString);
         response = validatorNegativeNumbers();
-        if (response != ""){
+        if (!response.equals("")){
             return response;
         }
+        return "";
+    }
 
-        return sum();
+    private String  validationStringNumbers(String inputValue) {
+        int pos=0;
+        if (inputValue.equals("")){
+            return "0";
+        }
+        if (inputValue.contains(",\\n") || inputValue.contains("\\n,")) {
+            for (int i=0;i<inputValue.length();i++){
+                if(inputValue.charAt(i) == '\\'){
+                    pos = i;
+                }
+            }
+            return "Number expected but '\\n' found at position "+pos+".";
+        }
+        else if(inputValue.charAt(inputValue.length()-1) == ','){
+            return "Number expected but EOF found.";
+        }
+        return "";
+    }
+
+    private String removeDelimiter(String inputValue, char delimiter) {
+        inputValue = inputValue.replace('/',' ');
+        inputValue = inputValue.replace('/',' ');
+        inputValue = inputValue.replace('\\', ' ');
+        inputValue = inputValue.replace('n', delimiter);
+        return inputValue;
+    }
+
+    private String extractInputDelimiter(String inputValue){
+        StringBuilder delimiter= new StringBuilder();
+        if(inputValue.contains("//")) {
+            int startPosition = inputValue.lastIndexOf("/");
+            int finalPosition = inputValue.indexOf("\n");
+            for (int i = startPosition+1; i < finalPosition; i++) {
+                delimiter.append(inputValue.charAt(i));
+            }
+        }
+        else{
+            delimiter.append(",");
+        }
+        return delimiter.toString();
+    }
+
+    private List<String> removeEmptySpaces(List<String> numbersFromString){
+        while(numbersFromString.get(0).contains(" ")){
+            numbersFromString.set(0, numbersFromString.get(0).replace(' ', '0'));
+        }
+        return numbersFromString;
+    }
+
+    private String validatorNegativeNumbers(){
+        StringBuilder response = new StringBuilder();
+        for (String number : this.numbers) {
+            if (Double.parseDouble(number) < 0) {
+                if (response.toString().equals("")) {
+                    response = new StringBuilder("Negative not allowed :");
+                }
+                response.append(" ").append(number);
+            }
+        }
+        return response.toString();
     }
 
     private String sum(){
         Double sum = 0.0;
-        String result="";
+        String result;
 
-        for (int i=0;i<this.numbers.size();i++){
-            sum+= Double.parseDouble(this.numbers.get(i));
+        for (String number : this.numbers) {
+            sum += Double.parseDouble(number);
         }
         result = String.format("%.1f", sum);
         if(result.contains(",0")){
@@ -68,86 +123,17 @@ public class StringCalculator implements StringCalculatorIntarface{
         return result;
     }
 
-    private String  validationStringNumbers(String numbers) {
-        int pos=0;
-        if (numbers.equals("")){
-            return "0";
+    private String multi(){
+        Double multi = 1.0;
+        String result;
+        for (String number : this.numbers) {
+            multi = multi * Double.parseDouble(number);
         }
-        if (numbers.contains(",\\n") || numbers.contains("\\n,")) {
-            for (int i=0;i<numbers.length();i++){
-                if(numbers.charAt(i) == '\\'){
-                    pos = i;
-                }
-            }
-            return "Number expected but '\\n' found at position "+pos+".";
-        }
-        else if(numbers.charAt(numbers.length()-1) == ','){
-            return "Number expected but EOF found.";
-        }
-        return "";
-    }
-
-     private String removeDelimiter(String numbers, char delimiter) {
-        numbers = numbers.replace('/',' ');
-        numbers = numbers.replace('/',' ');
-        numbers = numbers.replace('\\', ' ');
-        numbers = numbers.replace('n', delimiter);
-        return numbers;
-     }
-
-     private String extractInputDelimiter(String numbers){
-        StringBuilder delimiter= new StringBuilder();
-        if(numbers.contains("//")) {
-            int positionstart = numbers.lastIndexOf("/");
-            int posfinal = numbers.indexOf("\n");
-            System.out.println(numbers);
-            System.out.println(posfinal);
-            System.out.println(positionstart);
-            for (int i = positionstart+1; i < posfinal; i++) {
-                System.out.println(numbers.charAt(i));
-                delimiter.append(numbers.charAt(i));
-            }
-        }
-        else{
-            delimiter.append(",");
-        }
-
-        return delimiter.toString();
-     }
-
-     private String[] removeEmptySpaces(String[] separeNumbers){
-        while(separeNumbers[0].contains(" ")){
-            separeNumbers[0] = separeNumbers[0].replace(' ','0');
-        }
-        return separeNumbers;
-     }
-
-    private String validatorNegativeNumbers(){
-        String response = "";
-        for (int i=0;i<this.numbers.size();i++){
-            if(Double.parseDouble(this.numbers.get(i)) < 0){
-                if(response==""){
-                    response = "Negative not allowed :";
-                }
-                response = response+" "+this.numbers.get(i);
-            }
-        }
-        return response;
-    }
-
-    private String mult(){
-        Double mult = 0.0;
-        String result="";
-
-        for (int i=0;i<this.numbers.size();i++){
-            mult+= Double.parseDouble(this.numbers.get(i));
-        }
-        result = String.format("%.1f", mult);
+        result = String.format("%.1f", multi);
         if(result.contains(",0")){
-            Integer convert = mult.intValue();
+            Integer convert = multi.intValue();
             result = convert.toString();
         }
-
         return result;
     }
 
